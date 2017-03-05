@@ -1,0 +1,13 @@
+.box {
+  padding: 1rem;
+}
+
+.inner {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.inner button:first-child {
+  margin-right: 1rem;
+}

@@ -1,0 +1,52 @@
+:import('../../styles/constants.css') {
+  --grey-light: --grey-light;
+  --grey-dark: --grey-dark;
+  --white: --white;
+}
+
+.modal {
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  background: rgba(0,0,0,0.3);
+  position: fixed;
+  visibility: hidden;
+  opacity: 0;
+  display: flex;
+  transition: opacity 0.5s ease;
+  z-index: 4;
+  transform: translateZ(0);
+}
+
+.panel {
+  position: relative;
+  background-color: --white;
+  padding: 0 1rem 1rem;
+  width: 500px;
+  max-width: 100%;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+  z-index: 6;
+  box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.09);
+}
+
+.panel header {
+  background-color: --grey-light;
+  padding: 1rem 4rem 1rem 1rem;
+  margin: 0 -1rem 1rem;
+}
+
+/* Modal Active */
+.activeModal {
+  composes: modal;
+  opacity: 1;
+  visibility: visible;
+}
+
+.activeModal .panel {
+  transform: scale(1);
+}

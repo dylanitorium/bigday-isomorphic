@@ -1,0 +1,29 @@
+:import('../../styles/constants.css') {
+  --white: --white;
+  --grey-lightest: --grey-lightest;
+  --grey: --grey;
+  --grey-dark: --grey-dark;
+  --grey-light: --grey-light;
+  --red-light: --red-light;
+  --red: --red;
+  --blue-light: --blue-light;
+  --blue: --blue;
+  --green-light: --green-light;
+  --green: --green;
+  --yellow-light: --yellow-light;
+  --yellow: --yellow;
+}
+
+.alertbox {
+  border: 1px solid --grey-dark;
+  background-color: --grey-lightest;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.bad {
+  composes: alertbox;
+  background-color: --red-light;
+  border-color: --red;
+  color: --red;
+}

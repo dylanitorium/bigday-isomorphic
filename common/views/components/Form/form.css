@@ -1,0 +1,14 @@
+.form {
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form:before,
+.form:after {
+  display: table;
+  content: '';
+}
+
+.form:after {
+  clear: both;
+}

@@ -1,0 +1,5 @@
+.main {
+  flex-grow: 3;
+  padding: 2rem;
+  overflow-y: auto;
+}

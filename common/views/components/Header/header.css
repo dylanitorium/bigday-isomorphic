@@ -1,0 +1,17 @@
+:import('../../styles/constants.css') {
+  --black: --grey-dark;
+  --white: --white;
+}
+
+.header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid --black;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header h1 {
+  display: inline-block;
+  margin-right: 10px;
+}

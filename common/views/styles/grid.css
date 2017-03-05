@@ -1,0 +1,37 @@
+.inline {
+  display: inline-block;
+  padding: 0 0.5rem;
+}
+
+.alpha {
+  padding-left: 0;
+}
+
+.omega {
+  padding-right: 0;
+}
+
+.oneQuarter {
+  composes: inline;
+  width: 25%;
+}
+
+.threeQuarters {
+  composes: inline;
+  width: 75%;
+}
+
+.half {
+  composes: inline;
+  width: 50%;
+}
+
+.oneThird {
+  composes: inline;
+  width: 33.333%
+}
+
+.twoThirds {
+  composes: inline;
+  width: 33.333%
+}

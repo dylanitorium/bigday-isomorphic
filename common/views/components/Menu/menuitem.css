@@ -1,0 +1,25 @@
+:import('../../styles/constants.css') {
+  item-text-color: --grey-darkest;
+  item-bg-color: --grey-light;
+  item-bg-color-active: --grey;
+  item-border-color: --grey-lightest;
+}
+
+.item {
+  background-color: item-bg-color;
+  border-top: 1px solid item-border-color;
+  color: item-text-color;
+  display: block;
+  padding: 0.8rem 2rem;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.item:hover,
+.item:focus,
+.item:active,
+.active {
+  background-color: item-bg-color-active;
+}

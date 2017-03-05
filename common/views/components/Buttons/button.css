@@ -1,0 +1,209 @@
+:import('../../styles/constants.css') {
+  --white: --white;
+  --grey-lightest: --grey-lightest;
+  --grey: --grey;
+  --grey-dark: --grey-dark;
+  --grey-light: --grey-light;
+  --red-light: --red-light;
+  --red: --red;
+  --blue-light: --blue-light;
+  --blue: --blue;
+  --green-light: --green-light;
+  --green: --green;
+  --yellow-light: --yellow-light;
+  --yellow: --yellow;
+}
+
+/* ---- Base ---- */
+.button {
+  background-color: white;
+  border: 2px solid transparent;
+  text-align: center;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  letter-spacing: 0.09em;
+}
+
+.button svg {
+  transition: all 0.3s ease;
+  fill: #333;
+}
+
+.action {
+  cursor: pointer;
+}
+
+.button:hover,
+.button:active,
+.button:focus {
+  outline: 0;
+}
+
+/* ---- Shapes ---- */
+
+.rectangle {
+  padding: 1em 1.5em;
+}
+
+.circle {
+  border-radius: 50%;
+  width: 2em;
+  height: 2em;
+}
+
+/* ---- Sizes ---- */
+
+.large {
+  font-size: 2rem;
+}
+
+.medium {
+  font-size: 1.5rem;
+}
+
+.small {
+  font-size: 1rem;
+}
+
+/* ---- Colours ---- */
+
+
+.blue {
+
+}
+
+.staticGreen {
+  border-color: --green;
+  color: --green;
+}
+
+.staticGreen svg {
+  fill: --green;
+}
+
+.staticYellow {
+  border-color: --yellow;
+  color: --yellow;
+}
+
+.staticYellow svg {
+  fill: --yellow;
+}
+
+.staticGrey {
+  border-color: --grey-dark;
+  color: --grey-dark;
+}
+
+.staticGrey svg {
+  fill: --grey-dark;
+}
+
+/* ---- States ---- */
+.hoverRed:hover,
+.hoverRed:focus,
+.hoverRed:active {
+  color: --red;
+  border-color: --red;
+  background-color: --red-light;
+}
+
+.hoverRed:hover svg,
+.hoverRed:focus svg,
+.hoverRed:active svg {
+  fill: --red;
+}
+
+
+.hoverBlue:hover,
+.hoverBlue:focus,
+.hoverBlue:active {
+  color: --blue;
+  border-color: --blue;
+  background-color: --blue-light;
+}
+
+.hoverBlue:hover svg,
+.hoverBlue:focus svg,
+.hoverBlue:active svg {
+  fill: --blue;
+}
+
+
+.hoverGreen:hover,
+.hoverGreen:focus,
+.hoverGreen:active {
+  color: --green;
+  border-color: --green;
+  background-color: --green-light;
+}
+
+.hoverGreen:hover svg,
+.hoverGreen:focus svg,
+.hoverGreen:active svg {
+  fill: --green;
+}
+
+.hoverYellow {
+
+}
+
+/* ---- Styles ---- */
+
+.bordered {
+  border: 2px solid --grey-light;
+}
+
+.transparent {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+/* ---- Compostions ---- */
+.formButton {
+  composes: button bordered action small rectangle;
+}
+
+.formSubmitButton {
+  composes: formButton hoverGreen;
+}
+
+.formCancelButton {
+  composes: formButton hoverRed;
+}
+
+.tableAction {
+  composes: button action circle medium bordered;
+}
+
+.editButton {
+  composes: tableAction hoverBlue;
+}
+
+.deleteButton {
+  composes: tableAction hoverRed;
+}
+
+.addButton {
+  composes: tableAction hoverGreen;
+}
+
+.closeButton {
+  composes: button action circle small hoverRed;
+}
+
+.indicator {
+  composes: button circle small transparent;
+}
+
+.okIndicator {
+  composes: indicator staticGreen;
+}
+
+.syncingIndicator {
+  composes: indicator staticGrey;
+}
+
+.warningIndicator {
+  composes: indicator staticYellow action;
+}

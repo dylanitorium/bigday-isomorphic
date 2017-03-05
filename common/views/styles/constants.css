@@ -1,0 +1,17 @@
+:export {
+  --grey-lightest: rgba(236, 240, 241, 1.0);
+  --grey-light: rgba(189, 195, 199, 1.0);
+  --grey: rgba(149, 165, 166, 1.0);
+  --grey-dark: rgba(149, 165, 166, 1.0);
+  --grey-darkest: #333333;
+  --black: #333333;
+  --red-light: rgba(192, 57, 43, 0.1);
+  --red: rgba(192, 57, 43, 1.0);
+  --blue-light: rgba(41, 128, 185, 0.1);
+  --blue: rgba(41, 128, 185, 1.0);
+  --green-light: rgba(39, 174, 96, 0.1);
+  --green: rgba(39, 174, 96, 1.0);
+  --yellow-light: rgba(243, 156, 18, 0.1);
+  --yellow: rgba(243, 156, 18, 1.0);
+  --white: #FFFFFF;
+}

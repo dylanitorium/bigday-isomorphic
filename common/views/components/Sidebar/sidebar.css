@@ -1,0 +1,5 @@
+.sidebar {
+  background-color: #eee;
+  width: 250px;
+  overflow-y: auto;
+}

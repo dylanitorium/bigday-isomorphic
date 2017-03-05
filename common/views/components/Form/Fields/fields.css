@@ -1,0 +1,75 @@
+:import('../../../styles/constants.css') {
+  --white: --white;
+  --grey-lightest: --grey-lightest;
+  --grey: --grey;
+  --grey-dark: --grey-dark;
+  --grey-light: --grey-light;
+  --red-light: --red-light;
+  --red: --red;
+  --blue-light: --blue-light;
+  --blue: --blue;
+  --green-light: --green-light;
+  --green: --green;
+  --yellow-light: --yellow-light;
+  --yellow: --yellow;
+}
+
+.formField {
+  margin-bottom: 1rem;
+}
+
+
+.formField:last-of-type {
+  margin-bottom: 2rem;
+}
+
+.formField label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.formField input {
+  display: block;
+  background-color: --grey-lightest;
+  border: 1px solid transparent;
+  padding: 0 1rem;
+  height: 3rem;
+  width: 100%;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.formField input:hover,
+.formField input:active,
+.formField input:focus {
+  outline: 0;
+}
+
+.formField input:active,
+.formField input:focus {
+  border-color: --grey-light;
+}
+
+.formFieldValid input,
+.formFieldValid input:active,
+.formFieldValid input:focus {
+  border-color: --green;
+  background-color: --green-light
+}
+
+.formFieldInvalid input,
+.formFieldInvalid input:active,
+.formFieldInvalid input:focus {
+  border-color: --red;
+  background-color: --red-light
+}
+
+
+.numericField {
+  composes: formField;
+}
+
+.numericField input::-webkit-inner-spin-button,
+.numericField input::-webkit-outer-spin-button {
+  display: none;
+}
