@@ -10,7 +10,7 @@ const augmentGuest = item => Object.assign({}, item._doc, {
   isSyncing: false,
 });
 
-const augmentGuestList = items => (new Promise(resolve => (resolve(items.map(augmentGuest)))));
+const augmentGuestList = items => items.map(augmentGuest);
 
 const createUpdate = update => ({
   $set: update,
@@ -34,10 +34,12 @@ const handlePatch = ({ type, query, guest }) => {
   }
 };
 
-export function getGuestList() { //eslint-disable-line
+export const getGuestList = () => { //eslint-disable-line
   return Guest.find().exec().then(augmentGuestList);
-}
+};
 
-export function patchGuests(patch) {
-  return handlePatch(patch).then(() => (getGuestList()));
-}
+export const patchGuests = patch => handlePatch(patch).then(() => (getGuestList()));
+
+const findGuestByCode = code => Guest.findOne();
+
+export const getGuestByCode = code => findGuestByCode(code);

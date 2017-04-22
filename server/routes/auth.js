@@ -16,3 +16,7 @@ export const local = passport => (
     });
   })(req, res, next))
 );
+
+export const localApiKey = passport => (
+  (req, res, next) => (passport.authenticate('localapikey')(req, res, next))
+);

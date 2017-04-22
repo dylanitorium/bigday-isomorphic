@@ -1,7 +1,10 @@
 
-//command line tool to create components
 
+//Implement local apikey strategy
 
+//Set up email sending
+
+//Proper API access
 //Delete confirmation
 //Undo
 //separate config
@@ -9,7 +12,7 @@
 //read more redux docs.
 //Validation
 //add rejections to server utils
-//move stuf form guest controller to guest util
+//move stuff form guest controller to guest util
 //Good error messages from the server
 //Error messages, pops and handling
 //empty field placeholders

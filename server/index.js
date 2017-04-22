@@ -7,6 +7,7 @@ import { getGuestList } from './api/guests';
 import configureStore from '../common/state/stores/configureStore';
 import createRoutes from '../common/views/routes';
 
+
 const initialiseStore = (data, currentUser = {}) => {
   const isAuthenticated = !!currentUser.id;
   let initialState;

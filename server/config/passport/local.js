@@ -1,7 +1,6 @@
 import { Strategy } from 'passport-local';
-import { localAuthCallback } from '../../api/users';
+import { localAuthCallback } from '../../api/auth';
 
 export default new Strategy({
   usernameField: 'email',
-  // passReqToCallback: true,
 }, localAuthCallback);

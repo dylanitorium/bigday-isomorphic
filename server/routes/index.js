@@ -16,21 +16,20 @@ export default (app, passport) => {
   const router = new Router();
 
   router.get('/', requireAuthenticated, initialRender);
+
   // Auth
   // Local
   // -----
   router.post('/auth/login', auth.local(passport));
   router.post('/auth/logout', users.logoutUser);
 
-  // User
-  router.route('/api/users/add').post(users.createUser);
-  router.route('/api/users/delete/:id').post(users.deleteUser);
-  router.route('/api/users').get(users.getUsers);
-  router.route('/api/users/:id').get(users.getUserById);
 
   // Guests
   // ======
+  router.route('/api/*').all(auth.localApiKey(passport));
+
   router.route('/api/guests').post(guests.patchGuests);
+  router.route('/api/guest').post(guests.getGuest);
 
   router.get('*', initialRender);
   router.use(catchError);
