@@ -1,9 +1,9 @@
 import local from './local';
-import localApiKey from './localApiKey';
+
 import {
   intoSession,
   outOfSession,
-} from '../../api/users';
+} from '../../api/auth';
 
 export default (passport) => {
   // Session Control
@@ -14,5 +14,4 @@ export default (passport) => {
   // Strategies
   // ==========
   passport.use(local);
-  passport.use(localApiKey);
 };
