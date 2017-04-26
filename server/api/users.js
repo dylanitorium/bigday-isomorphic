@@ -1,3 +1,4 @@
+import { apikey } from 'apikeygen';
 import bcrypt from 'bcrypt-nodejs';
 import User from '../models/users';
 
@@ -54,4 +55,12 @@ const handleUserResult = (done, password, message) => (
 export const localAuthCallback = (email, password, done) => {
   const message = 'Those details don\'t seem to be correct';
   getUser({ email }).then(handleUserResult(done, password, message));
+};
+
+export const generateApiKey = (user) => {
+  const key = apikey();
+  return getUserById(user.id).then((doc) => {
+    doc.apikey = key;
+    doc.save();
+  });
 };

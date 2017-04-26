@@ -27,6 +27,7 @@ export default (app, passport) => {
   router.route('/api/users/delete/:id').post(users.deleteUser);
   router.route('/api/users').get(users.getUsers);
   router.route('/api/users/:id').get(users.getUserById);
+  router.route('/api/generateApiKey').post(users.generateApiKey);
 
   // Guests
   // ======
