@@ -28697,6 +28697,10 @@
 
 	var _Guests2 = _interopRequireDefault(_Guests);
 
+	var _Settings = __webpack_require__(406);
+
+	var _Settings2 = _interopRequireDefault(_Settings);
+
 	var _Login = __webpack_require__(289);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -28747,7 +28751,8 @@
 	      _reactRouter.Route,
 	      { path: '/', component: _App2.default, onEnter: requireAuth(store) },
 	      _react2.default.createElement(_reactRouter.IndexRoute, { component: Dashboard }),
-	      _react2.default.createElement(_reactRouter.Route, { path: '/guests', component: _Guests2.default })
+	      _react2.default.createElement(_reactRouter.Route, { path: '/guests', component: _Guests2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/settings', component: _Settings2.default })
 	    ),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _Login.Login, onEnter: redirectIfAuth(store) })
 	  );
@@ -29196,6 +29201,7 @@
 	  type: 'TextField',
 	  name: 'email',
 	  title: 'Email',
+	  default: '',
 	  validation: {
 	    callback: _validation.requiredField
 	  }
@@ -29203,6 +29209,7 @@
 	  type: 'PasswordField',
 	  name: 'password',
 	  title: 'Password',
+	  default: '',
 	  props: {
 	    hiddenConfirm: true
 	  },
@@ -29405,14 +29412,14 @@
 	  );
 	};
 
-	var getInitialState = function getInitialState(fields) {
+	var getInitialState = function getInitialState(fields, props) {
 	  var state = {
 	    validation: {},
 	    values: {}
 	  };
 	  fields.forEach(function (field) {
 	    state.validation[field.name] = null;
-	    state.values[field.name] = field.default;
+	    state.values[field.name] = props.formData[field.name] || field.default;
 	  });
 	  return state;
 	};
@@ -29427,7 +29434,7 @@
 
 	    var fields = props.fields;
 
-	    _this.state = getInitialState(fields);
+	    _this.state = getInitialState(fields, props);
 	    _this.handleFieldChange = _this.handleFieldChange.bind(_this);
 	    _this.handleFormSubmit = _this.handleFormSubmit.bind(_this);
 	    return _this;
@@ -31026,6 +31033,11 @@
 	var LOGOUT_SUCCESS = exports.LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 	var LOGOUT_ERROR = exports.LOGOUT_ERROR = 'LOGOUT_ERROR';
 
+	var USER_GROUPS = exports.USER_GROUPS = {
+	  ADMIN: 'ADMIN',
+	  EDITOR: 'EDITOR'
+	};
+
 /***/ },
 /* 332 */
 /***/ function(module, exports) {
@@ -32117,6 +32129,10 @@
 	}, {
 	  path: '/guests',
 	  title: 'Guests',
+	  index: false
+	}, {
+	  path: '/settings',
+	  title: 'Settings',
 	  index: false
 	}];
 
@@ -34457,6 +34473,179 @@
 	  isAuthenticated: false,
 	  currentUser: {}
 	}, (_createReducer = {}, _defineProperty(_createReducer, _users.LOGIN_REQUEST, handleRequest), _defineProperty(_createReducer, _users.LOGIN_SUCCESS, handleLoginSuccess), _defineProperty(_createReducer, _users.LOGIN_ERROR, handleLoginError), _defineProperty(_createReducer, _users.LOGOUT_REQUEST, handleRequest), _defineProperty(_createReducer, _users.LOGOUT_SUCCESS, handleLogoutSuccess), _defineProperty(_createReducer, _users.LOGOUT_ERROR, handleLogoutError), _createReducer));
+
+/***/ },
+/* 406 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _SettingsPanel = __webpack_require__(407);
+
+	Object.defineProperty(exports, 'default', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_SettingsPanel).default;
+	  }
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ },
+/* 407 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _SettingsHeader = __webpack_require__(408);
+
+	var _SettingsHeader2 = _interopRequireDefault(_SettingsHeader);
+
+	var _ApiKeyForm = __webpack_require__(409);
+
+	var _ApiKeyForm2 = _interopRequireDefault(_ApiKeyForm);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function () {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(_SettingsHeader2.default, null),
+	    _react2.default.createElement(_ApiKeyForm2.default, null)
+	  );
+	};
+
+/***/ },
+/* 408 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Header = __webpack_require__(372);
+
+	var _Header2 = _interopRequireDefault(_Header);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var SettingsHeader = function SettingsHeader() {
+	  return _react2.default.createElement(_Header2.default, { title: 'Settings' });
+	};
+
+	exports.default = SettingsHeader;
+
+/***/ },
+/* 409 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(178);
+
+	var _Form = __webpack_require__(292);
+
+	var _Form2 = _interopRequireDefault(_Form);
+
+	var _settings = __webpack_require__(410);
+
+	__webpack_require__(317);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var handleSubmit = function handleSubmit() {};
+	var handleDataChange = function handleDataChange() {};
+
+	var ApiKeyForm = function (_React$Component) {
+	  _inherits(ApiKeyForm, _React$Component);
+
+	  function ApiKeyForm(props) {
+	    _classCallCheck(this, ApiKeyForm);
+
+	    var _this = _possibleConstructorReturn(this, (ApiKeyForm.__proto__ || Object.getPrototypeOf(ApiKeyForm)).call(this, props));
+
+	    _this.state = props;
+	    return _this;
+	  }
+
+	  _createClass(ApiKeyForm, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(_Form2.default, {
+	        fields: _settings.formFields,
+	        formData: this.state,
+	        onSubmit: handleSubmit,
+	        onDataChange: handleDataChange,
+	        buttonText: 'Generate'
+	      });
+	    }
+	  }]);
+
+	  return ApiKeyForm;
+	}(_react2.default.Component);
+
+	ApiKeyForm.propTypes = {
+	  // guest: React.PropTypes.object.isRequired, // eslint-disable-line
+	  // updateGuest: React.PropTypes.func.isRequired,
+	  // closeModal: React.PropTypes.func.isRequired,
+	};
+
+	exports.default = (0, _reactRedux.connect)(function (state) {
+	  return {
+	    apikey: 'adasa'
+	  };
+	}, {})(ApiKeyForm);
+
+/***/ },
+/* 410 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var formFields = exports.formFields = [{
+	  type: 'TextField',
+	  name: 'apikey',
+	  title: 'Api Key',
+	  default: ''
+	}];
 
 /***/ }
 /******/ ]);

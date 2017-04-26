@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import App from './containers/App';
 import GuestPanel from './containers/Guests';
+import SettingsPanel from './containers/Settings';
 import { Login } from './containers/Login';
 
 const Dashboard = () => (<div>Dashboards</div>);
@@ -38,6 +39,7 @@ export default store => (
     <Route path="/" component={App} onEnter={requireAuth(store)}>
       <IndexRoute component={Dashboard} />
       <Route path="/guests" component={GuestPanel} />
+      <Route path="/settings" component={SettingsPanel} />
     </Route>
     <Route path="/login" component={Login} onEnter={redirectIfAuth(store)} />
   </Route>

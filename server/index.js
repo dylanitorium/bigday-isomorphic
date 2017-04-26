@@ -72,8 +72,6 @@ export default function initialRender(req, res) {
     const initialState = store.getState();
     const routes = createRoutes(store);
 
-    console.log(req.flash());
-
     match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
       if (error) {
         res.status(500).send(error.message);
@@ -82,6 +80,7 @@ export default function initialRender(req, res) {
       } else if (renderProps) {
         // Initial Render
         // ==============
+        console.log(renderProps);
         const html = renderToString(
           <div>
             <Provider store={store}>

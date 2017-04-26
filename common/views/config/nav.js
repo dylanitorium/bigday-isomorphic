@@ -9,4 +9,9 @@ export const navItems = [ // eslint-disable-line
     title: 'Guests',
     index: false,
   },
+  {
+    path: '/settings',
+    title: 'Settings',
+    index: false,
+  },
 ];
