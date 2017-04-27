@@ -1,4 +1,4 @@
-export const navItems = [ // eslint-disable-line
+export const navItems = [
   {
     path: '/',
     title: 'Dashboard',

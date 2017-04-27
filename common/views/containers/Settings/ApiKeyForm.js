@@ -5,45 +5,37 @@ import { connect } from 'react-redux';
 import Form from '../../components/Form';
 import { formFields } from '../../config/settings';
 import {
-
+  generateApiKey,
 } from '../../../state/actions';
 
 
-const handleSubmit = () => {};
+const handleSubmit = props => () => (props.generateApiKey());
 const handleDataChange = () => {};
 
 
-class ApiKeyForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = props;
-  }
+const ApiKeyForm = props => (
+  <Form
+    fields={formFields}
+    formData={props}
+    onSubmit={handleSubmit(props)}
+    onDataChange={handleDataChange}
+    buttonText={'Generate'}
+  />
+);
 
-  render() {
-    return (
-      <Form
-        fields={formFields}
-        formData={this.state}
-        onSubmit={handleSubmit}
-        onDataChange={handleDataChange}
-        buttonText={'Generate'}
-      />
-    );
-  }
-}
 
 ApiKeyForm.propTypes = {
-  // guest: React.PropTypes.object.isRequired, // eslint-disable-line
-  // updateGuest: React.PropTypes.func.isRequired,
-  // closeModal: React.PropTypes.func.isRequired,
+  apikey: React.PropTypes.string.isRequired,
 };
 
+const mapStateToProps = state => ({
+  apikey: state.users.currentUser.apikey || '',
+});
+
 export default connect(
-  (state) => ({
-    apikey: 'adasa',
-  }),
+  mapStateToProps,
   {
+    generateApiKey,
   },
 )(ApiKeyForm);
-
 

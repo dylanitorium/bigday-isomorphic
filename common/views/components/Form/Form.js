@@ -78,6 +78,11 @@ class Form extends React.Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { fields } = nextProps;
+    this.state = getInitialState(fields, nextProps);
+  }
+
   handleFieldChange(event) {
     const { validation, values } = this.state;
     const { fields } = this.props;

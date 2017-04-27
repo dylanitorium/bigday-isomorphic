@@ -60,7 +60,7 @@
 
 	var _routes2 = _interopRequireDefault(_routes);
 
-	var _configureStore = __webpack_require__(393);
+	var _configureStore = __webpack_require__(398);
 
 	var _configureStore2 = _interopRequireDefault(_configureStore);
 
@@ -28697,7 +28697,7 @@
 
 	var _Guests2 = _interopRequireDefault(_Guests);
 
-	var _Settings = __webpack_require__(406);
+	var _Settings = __webpack_require__(393);
 
 	var _Settings2 = _interopRequireDefault(_Settings);
 
@@ -29441,6 +29441,13 @@
 	  }
 
 	  _createClass(Form, [{
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      var fields = nextProps.fields;
+
+	      this.state = getInitialState(fields, nextProps);
+	    }
+	  }, {
 	    key: 'handleFieldChange',
 	    value: function handleFieldChange(event) {
 	      var _state = this.state,
@@ -30810,7 +30817,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.logout = exports.login = undefined;
+	exports.generateApiKey = exports.logout = exports.login = undefined;
 
 	var _reactRouterRedux = __webpack_require__(330);
 
@@ -30825,6 +30832,10 @@
 	var logoutRequest = (0, _utils.makeActionCreator)(_users.LOGOUT_REQUEST);
 	var logoutSuccess = (0, _utils.makeActionCreator)(_users.LOGOUT_SUCCESS);
 	var logoutError = (0, _utils.makeActionCreator)(_users.LOGOUT_ERROR, 'error');
+
+	var generateApiKeyRequest = (0, _utils.makeActionCreator)(_users.GENERATE_APIKEY_REQUEST);
+	var generateApiKeySuccess = (0, _utils.makeActionCreator)(_users.GENERATE_APIKEY_SUCCESS, 'user');
+	var generateApiKeyError = (0, _utils.makeActionCreator)(_users.GENERATE_APIKEY_ERROR, 'error');
 
 	var login = exports.login = function login(credentials) {
 	  return function (dispatch) {
@@ -30867,6 +30878,25 @@
 	      location.reload();
 	    }).catch(function (err) {
 	      return dispatch(logoutError(err));
+	    });
+	  };
+	};
+
+	var generateApiKey = exports.generateApiKey = function generateApiKey() {
+	  return function (dispatch) {
+	    dispatch(generateApiKeyRequest());
+	    fetch('/api/generateApiKey', {
+	      method: 'post',
+	      mode: 'cors',
+	      credentials: 'same-origin',
+	      headers: {
+	        'Accept': 'application/json', //eslint-disable-line
+	        'Content-Type': 'application/json' //eslint-disable-line
+	      }
+	    }).then(_utils.checkResponseStatus).then(_utils.parseJSON).then(function (user) {
+	      dispatch(generateApiKeySuccess(user));
+	    }).catch(function (err) {
+	      return dispatch(generateApiKeyError(err));
 	    });
 	  };
 	};
@@ -31033,10 +31063,9 @@
 	var LOGOUT_SUCCESS = exports.LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 	var LOGOUT_ERROR = exports.LOGOUT_ERROR = 'LOGOUT_ERROR';
 
-	var USER_GROUPS = exports.USER_GROUPS = {
-	  ADMIN: 'ADMIN',
-	  EDITOR: 'EDITOR'
-	};
+	var GENERATE_APIKEY_REQUEST = exports.GENERATE_APIKEY_REQUEST = 'GENERATE_APIKEY_REQUEST';
+	var GENERATE_APIKEY_SUCCESS = exports.GENERATE_APIKEY_SUCCESS = 'GENERATE_APIKEY_SUCCESS';
+	var GENERATE_APIKEY_ERROR = exports.GENERATE_APIKEY_ERROR = 'GENERATE_APIKEY_ERROR';
 
 /***/ },
 /* 332 */
@@ -32121,8 +32150,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var navItems = exports.navItems = [// eslint-disable-line
-	{
+	var navItems = exports.navItems = [{
 	  path: '/',
 	  title: 'Dashboard',
 	  index: true
@@ -33282,12 +33310,166 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+
+	var _SettingsPanel = __webpack_require__(394);
+
+	Object.defineProperty(exports, 'default', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_SettingsPanel).default;
+	  }
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ },
+/* 394 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _SettingsHeader = __webpack_require__(395);
+
+	var _SettingsHeader2 = _interopRequireDefault(_SettingsHeader);
+
+	var _ApiKeyForm = __webpack_require__(396);
+
+	var _ApiKeyForm2 = _interopRequireDefault(_ApiKeyForm);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function () {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(_SettingsHeader2.default, null),
+	    _react2.default.createElement(_ApiKeyForm2.default, null)
+	  );
+	};
+
+/***/ },
+/* 395 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Header = __webpack_require__(372);
+
+	var _Header2 = _interopRequireDefault(_Header);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var SettingsHeader = function SettingsHeader() {
+	  return _react2.default.createElement(_Header2.default, { title: 'Settings' });
+	};
+
+	exports.default = SettingsHeader;
+
+/***/ },
+/* 396 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(178);
+
+	var _Form = __webpack_require__(292);
+
+	var _Form2 = _interopRequireDefault(_Form);
+
+	var _settings = __webpack_require__(397);
+
+	var _actions = __webpack_require__(317);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var handleSubmit = function handleSubmit(props) {
+	  return function () {
+	    return props.generateApiKey();
+	  };
+	};
+	var handleDataChange = function handleDataChange() {};
+
+	var ApiKeyForm = function ApiKeyForm(props) {
+	  return _react2.default.createElement(_Form2.default, {
+	    fields: _settings.formFields,
+	    formData: props,
+	    onSubmit: handleSubmit(props),
+	    onDataChange: handleDataChange,
+	    buttonText: 'Generate'
+	  });
+	};
+
+	ApiKeyForm.propTypes = {
+	  apikey: _react2.default.PropTypes.string.isRequired
+	};
+
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    apikey: state.users.currentUser.apikey || ''
+	  };
+	};
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, {
+	  generateApiKey: _actions.generateApiKey
+	})(ApiKeyForm);
+
+/***/ },
+/* 397 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var formFields = exports.formFields = [// eslint-disable-line
+	{
+	  type: 'TextField',
+	  name: 'apikey',
+	  title: 'Api Key',
+	  default: ''
+	}];
+
+/***/ },
+/* 398 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	exports.reduxRouterMiddleware = undefined;
 	exports.default = configureStore;
 
 	var _redux = __webpack_require__(189);
 
-	var _reduxThunk = __webpack_require__(394);
+	var _reduxThunk = __webpack_require__(399);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
@@ -33295,11 +33477,11 @@
 
 	var _reactRouter = __webpack_require__(216);
 
-	var _reduxLogger = __webpack_require__(395);
+	var _reduxLogger = __webpack_require__(400);
 
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 
-	var _reducers = __webpack_require__(401);
+	var _reducers = __webpack_require__(406);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -33330,7 +33512,7 @@
 	}
 
 /***/ },
-/* 394 */
+/* 399 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -33358,7 +33540,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 395 */
+/* 400 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33369,11 +33551,11 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _core = __webpack_require__(396);
+	var _core = __webpack_require__(401);
 
-	var _helpers = __webpack_require__(397);
+	var _helpers = __webpack_require__(402);
 
-	var _defaults = __webpack_require__(400);
+	var _defaults = __webpack_require__(405);
 
 	var _defaults2 = _interopRequireDefault(_defaults);
 
@@ -33476,7 +33658,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 396 */
+/* 401 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33489,9 +33671,9 @@
 
 	exports.printBuffer = printBuffer;
 
-	var _helpers = __webpack_require__(397);
+	var _helpers = __webpack_require__(402);
 
-	var _diff = __webpack_require__(398);
+	var _diff = __webpack_require__(403);
 
 	var _diff2 = _interopRequireDefault(_diff);
 
@@ -33618,7 +33800,7 @@
 	}
 
 /***/ },
-/* 397 */
+/* 402 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -33642,7 +33824,7 @@
 	var timer = exports.timer = typeof performance !== "undefined" && performance !== null && typeof performance.now === "function" ? performance : Date;
 
 /***/ },
-/* 398 */
+/* 403 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33652,7 +33834,7 @@
 	});
 	exports.default = diffLogger;
 
-	var _deepDiff = __webpack_require__(399);
+	var _deepDiff = __webpack_require__(404);
 
 	var _deepDiff2 = _interopRequireDefault(_deepDiff);
 
@@ -33741,7 +33923,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 399 */
+/* 404 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global) {/*!
@@ -34170,7 +34352,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 400 */
+/* 405 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -34221,7 +34403,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 401 */
+/* 406 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34234,15 +34416,15 @@
 
 	var _reactRouterRedux = __webpack_require__(330);
 
-	var _guests = __webpack_require__(402);
+	var _guests = __webpack_require__(407);
 
 	var _guests2 = _interopRequireDefault(_guests);
 
-	var _modal = __webpack_require__(404);
+	var _modal = __webpack_require__(409);
 
 	var _modal2 = _interopRequireDefault(_modal);
 
-	var _users = __webpack_require__(405);
+	var _users = __webpack_require__(410);
 
 	var _users2 = _interopRequireDefault(_users);
 
@@ -34256,7 +34438,7 @@
 	});
 
 /***/ },
-/* 402 */
+/* 407 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34267,7 +34449,7 @@
 
 	var _createReducer;
 
-	var _utils = __webpack_require__(403);
+	var _utils = __webpack_require__(408);
 
 	var _guests = __webpack_require__(326);
 
@@ -34344,7 +34526,7 @@
 	}, (_createReducer = {}, _defineProperty(_createReducer, _guests.CREATE_GUEST_REQUEST, handleCreateGuest), _defineProperty(_createReducer, _guests.CREATE_GUEST_SUCCESS, handleIncomingGuestList), _defineProperty(_createReducer, _guests.CREATE_GUEST_ERROR, handlePatchGuestError), _defineProperty(_createReducer, _guests.DELETE_GUEST_REQUEST, handleDeleteGuest), _defineProperty(_createReducer, _guests.DELETE_GUEST_SUCCESS, handleIncomingGuestList), _defineProperty(_createReducer, _guests.DELETE_GUEST_ERROR, handlePatchGuestError), _defineProperty(_createReducer, _guests.UPDATE_GUEST_REQUEST, handleUpdateGuest), _defineProperty(_createReducer, _guests.UPDATE_GUEST_SUCCESS, handleIncomingGuestList), _defineProperty(_createReducer, _guests.UPDATE_GUEST_ERROR, handlePatchGuestError), _createReducer));
 
 /***/ },
-/* 403 */
+/* 408 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -34368,7 +34550,7 @@
 	}
 
 /***/ },
-/* 404 */
+/* 409 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34379,7 +34561,7 @@
 
 	var _createReducer;
 
-	var _utils = __webpack_require__(403);
+	var _utils = __webpack_require__(408);
 
 	var _modal = __webpack_require__(328);
 
@@ -34411,7 +34593,7 @@
 	}, (_createReducer = {}, _defineProperty(_createReducer, _modal.OPEN_MODAL, handleOpenModal), _defineProperty(_createReducer, _modal.CLOSE_MODAL, handleCloseModal), _createReducer));
 
 /***/ },
-/* 405 */
+/* 410 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34422,7 +34604,7 @@
 
 	var _createReducer;
 
-	var _utils = __webpack_require__(403);
+	var _utils = __webpack_require__(408);
 
 	var _users = __webpack_require__(331);
 
@@ -34466,186 +34648,28 @@
 	  });
 	};
 
+	var handleGenerateApiKeyRequest = function handleGenerateApiKeyRequest(state) {
+	  return Object.assign({}, state, {});
+	};
+	var handleGenerateApiKeySuccess = function handleGenerateApiKeySuccess(state, action) {
+	  return Object.assign({}, state, {
+	    currentUser: action.user
+	  });
+	};
+	var handleGenerateApiKeyError = function handleGenerateApiKeyError(state, action) {
+	  return Object.assign({}, state, {
+	    error: action.error,
+	    hasError: true
+	  });
+	};
+
 	exports.default = (0, _utils.createReducer)({
 	  error: '',
 	  hasError: false,
 	  isFetching: false,
 	  isAuthenticated: false,
 	  currentUser: {}
-	}, (_createReducer = {}, _defineProperty(_createReducer, _users.LOGIN_REQUEST, handleRequest), _defineProperty(_createReducer, _users.LOGIN_SUCCESS, handleLoginSuccess), _defineProperty(_createReducer, _users.LOGIN_ERROR, handleLoginError), _defineProperty(_createReducer, _users.LOGOUT_REQUEST, handleRequest), _defineProperty(_createReducer, _users.LOGOUT_SUCCESS, handleLogoutSuccess), _defineProperty(_createReducer, _users.LOGOUT_ERROR, handleLogoutError), _createReducer));
-
-/***/ },
-/* 406 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _SettingsPanel = __webpack_require__(407);
-
-	Object.defineProperty(exports, 'default', {
-	  enumerable: true,
-	  get: function get() {
-	    return _interopRequireDefault(_SettingsPanel).default;
-	  }
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ },
-/* 407 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _SettingsHeader = __webpack_require__(408);
-
-	var _SettingsHeader2 = _interopRequireDefault(_SettingsHeader);
-
-	var _ApiKeyForm = __webpack_require__(409);
-
-	var _ApiKeyForm2 = _interopRequireDefault(_ApiKeyForm);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = function () {
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement(_SettingsHeader2.default, null),
-	    _react2.default.createElement(_ApiKeyForm2.default, null)
-	  );
-	};
-
-/***/ },
-/* 408 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _Header = __webpack_require__(372);
-
-	var _Header2 = _interopRequireDefault(_Header);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var SettingsHeader = function SettingsHeader() {
-	  return _react2.default.createElement(_Header2.default, { title: 'Settings' });
-	};
-
-	exports.default = SettingsHeader;
-
-/***/ },
-/* 409 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRedux = __webpack_require__(178);
-
-	var _Form = __webpack_require__(292);
-
-	var _Form2 = _interopRequireDefault(_Form);
-
-	var _settings = __webpack_require__(410);
-
-	__webpack_require__(317);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var handleSubmit = function handleSubmit() {};
-	var handleDataChange = function handleDataChange() {};
-
-	var ApiKeyForm = function (_React$Component) {
-	  _inherits(ApiKeyForm, _React$Component);
-
-	  function ApiKeyForm(props) {
-	    _classCallCheck(this, ApiKeyForm);
-
-	    var _this = _possibleConstructorReturn(this, (ApiKeyForm.__proto__ || Object.getPrototypeOf(ApiKeyForm)).call(this, props));
-
-	    _this.state = props;
-	    return _this;
-	  }
-
-	  _createClass(ApiKeyForm, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(_Form2.default, {
-	        fields: _settings.formFields,
-	        formData: this.state,
-	        onSubmit: handleSubmit,
-	        onDataChange: handleDataChange,
-	        buttonText: 'Generate'
-	      });
-	    }
-	  }]);
-
-	  return ApiKeyForm;
-	}(_react2.default.Component);
-
-	ApiKeyForm.propTypes = {
-	  // guest: React.PropTypes.object.isRequired, // eslint-disable-line
-	  // updateGuest: React.PropTypes.func.isRequired,
-	  // closeModal: React.PropTypes.func.isRequired,
-	};
-
-	exports.default = (0, _reactRedux.connect)(function (state) {
-	  return {
-	    apikey: 'adasa'
-	  };
-	}, {})(ApiKeyForm);
-
-/***/ },
-/* 410 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var formFields = exports.formFields = [{
-	  type: 'TextField',
-	  name: 'apikey',
-	  title: 'Api Key',
-	  default: ''
-	}];
+	}, (_createReducer = {}, _defineProperty(_createReducer, _users.LOGIN_REQUEST, handleRequest), _defineProperty(_createReducer, _users.LOGIN_SUCCESS, handleLoginSuccess), _defineProperty(_createReducer, _users.LOGIN_ERROR, handleLoginError), _defineProperty(_createReducer, _users.LOGOUT_REQUEST, handleRequest), _defineProperty(_createReducer, _users.LOGOUT_SUCCESS, handleLogoutSuccess), _defineProperty(_createReducer, _users.LOGOUT_ERROR, handleLogoutError), _defineProperty(_createReducer, _users.GENERATE_APIKEY_REQUEST, handleGenerateApiKeyRequest), _defineProperty(_createReducer, _users.GENERATE_APIKEY_SUCCESS, handleGenerateApiKeySuccess), _defineProperty(_createReducer, _users.GENERATE_APIKEY_ERROR, handleGenerateApiKeyError), _createReducer));
 
 /***/ }
 /******/ ]);

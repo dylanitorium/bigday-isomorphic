@@ -6,6 +6,9 @@ import {
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
   LOGOUT_ERROR,
+  GENERATE_APIKEY_REQUEST,
+  GENERATE_APIKEY_SUCCESS,
+  GENERATE_APIKEY_ERROR,
 } from '../constants/users';
 
 const handleRequest = state => (
@@ -46,6 +49,22 @@ const handleLogoutError = state => (
   })
 );
 
+const handleGenerateApiKeyRequest = state => (
+  Object.assign({}, state, {
+
+  })
+);
+const handleGenerateApiKeySuccess = (state, action) => (
+  Object.assign({}, state, {
+    currentUser: action.user,
+  })
+);
+const handleGenerateApiKeyError = (state, action) => (
+  Object.assign({}, state, {
+    error: action.error,
+    hasError: true,
+  })
+);
 
 export default createReducer({
   error: '',
@@ -60,4 +79,7 @@ export default createReducer({
   [LOGOUT_REQUEST]: handleRequest,
   [LOGOUT_SUCCESS]: handleLogoutSuccess,
   [LOGOUT_ERROR]: handleLogoutError,
+  [GENERATE_APIKEY_REQUEST]: handleGenerateApiKeyRequest,
+  [GENERATE_APIKEY_SUCCESS]: handleGenerateApiKeySuccess,
+  [GENERATE_APIKEY_ERROR]: handleGenerateApiKeyError,
 });

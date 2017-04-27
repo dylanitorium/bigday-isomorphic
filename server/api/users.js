@@ -6,6 +6,7 @@ export const filterProperties = user => ({
   id: user.id,
   name: user.name || {},
   email: user.email,
+  apikey: user.apikey || '',
 });
 
 export const createUser = data => User.create(data);
@@ -62,5 +63,6 @@ export const generateApiKey = (user) => {
   return getUserById(user.id).then((doc) => {
     doc.apikey = key;
     doc.save();
+    return doc;
   });
 };
