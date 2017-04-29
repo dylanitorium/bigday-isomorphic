@@ -58,6 +58,21 @@ export const localAuthCallback = (email, password, done) => {
   getUser({ email }).then(handleUserResult(done, password, message));
 };
 
+export const localApiKeyAuthCallback = (key, done) => {
+  const message = 'Api Key not found';
+  getUser({ apikey: key }).then((user, error) => {
+    if (error) {
+      return done(error);
+    }
+
+    if (!user) {
+      return done(null, false, { message });
+    }
+
+    return done(null, user);
+  });
+};
+
 export const generateApiKey = (user) => {
   const key = apikey();
   return getUserById(user.id).then((doc) => {

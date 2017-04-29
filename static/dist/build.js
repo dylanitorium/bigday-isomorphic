@@ -30086,6 +30086,7 @@
 	  return (0, _isomorphicFetch2.default)('/api/guests', {
 	    method: 'post',
 	    mode: 'cors',
+	    credentials: 'same-origin',
 	    headers: {
 	      'Content-Type': 'application/json'
 	    },
@@ -30882,7 +30883,7 @@
 	  };
 	};
 
-	var generateApiKey = exports.generateApiKey = function generateApiKey() {
+	var generateApiKey = exports.generateApiKey = function generateApiKey(apikey) {
 	  return function (dispatch) {
 	    dispatch(generateApiKeyRequest());
 	    fetch('/api/generateApiKey', {
@@ -30890,6 +30891,7 @@
 	      mode: 'cors',
 	      credentials: 'same-origin',
 	      headers: {
+	        'apikey': apikey, //eslint-disable-line
 	        'Accept': 'application/json', //eslint-disable-line
 	        'Content-Type': 'application/json' //eslint-disable-line
 	      }

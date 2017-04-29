@@ -16,3 +16,18 @@ export const local = passport => (
     });
   })(req, res, next))
 );
+
+
+export const localApiKey = passport => (
+  (req, res, next) => (passport.authenticate('localapikey', (authError, user, info) => {
+    if (authError) {
+      return next(authError);
+    }
+
+    if (!user) {
+      return res.status(401).json(info);
+    }
+
+    return next();
+  })(req, res, next))
+);

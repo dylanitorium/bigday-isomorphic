@@ -76,7 +76,7 @@ export const logout = () => (
   }
 );
 
-export const generateApiKey = () => (
+export const generateApiKey = (apikey) => (
   (dispatch) => {
     dispatch(generateApiKeyRequest());
     fetch('/api/generateApiKey', {
@@ -84,6 +84,7 @@ export const generateApiKey = () => (
       mode: 'cors',
       credentials: 'same-origin',
       headers: {
+        'apikey': apikey, //eslint-disable-line
         'Accept': 'application/json', //eslint-disable-line
         'Content-Type': 'application/json' //eslint-disable-line
       },

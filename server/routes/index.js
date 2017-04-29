@@ -23,15 +23,15 @@ export default (app, passport) => {
   router.post('/auth/logout', users.logoutUser);
 
   // User
-  router.route('/api/users/add').post(users.createUser);
-  router.route('/api/users/delete/:id').post(users.deleteUser);
-  router.route('/api/users').get(users.getUsers);
-  router.route('/api/users/:id').get(users.getUserById);
   router.route('/api/generateApiKey').post(users.generateApiKey);
 
   // Guests
   // ======
-  router.route('/api/guests').post(guests.patchGuests);
+  router.route('/api/guests').post(requireAuthenticated, guests.patchGuests);
+  router.route('/api/guest').post(auth.localApiKey(passport), guests.patchGuests);
+
+
+
 
   router.get('*', initialRender);
   router.use(catchError);
