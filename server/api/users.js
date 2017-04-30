@@ -1,3 +1,4 @@
+import { apikey } from 'apikeygen';
 import bcrypt from 'bcrypt-nodejs';
 import User from '../models/users';
 
@@ -5,6 +6,7 @@ export const filterProperties = user => ({
   id: user.id,
   name: user.name || {},
   email: user.email,
+  apikey: user.apikey || '',
 });
 
 export const createUser = data => User.create(data);
@@ -54,4 +56,28 @@ const handleUserResult = (done, password, message) => (
 export const localAuthCallback = (email, password, done) => {
   const message = 'Those details don\'t seem to be correct';
   getUser({ email }).then(handleUserResult(done, password, message));
+};
+
+export const localApiKeyAuthCallback = (key, done) => {
+  const message = 'Api Key not found';
+  getUser({ apikey: key }).then((user, error) => {
+    if (error) {
+      return done(error);
+    }
+
+    if (!user) {
+      return done(null, false, { message });
+    }
+
+    return done(null, user);
+  });
+};
+
+export const generateApiKey = (user) => {
+  const key = apikey();
+  return getUserById(user.id).then((doc) => {
+    doc.apikey = key;
+    doc.save();
+    return doc;
+  });
 };

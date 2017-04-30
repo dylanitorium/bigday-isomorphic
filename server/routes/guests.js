@@ -5,6 +5,18 @@ import * as service from '../api/guests';
 
 export function patchGuests(req, res, next) { //eslint-disable-line
   service.patchGuests(req.body)
-  .then(data => (res.json(data)))
-  .catch(err => console.error(err));
+    .then(data => (res.json(data)))
+    .catch(err => console.error(err));
 }
+
+export function getGuestByCode(req, res, next) {
+  if (!req.params.code) {
+    next('No code');
+  }
+  service.getGuestByCode(req.params.code)
+    .then((data) => {
+      res.json(data);
+    })
+    .catch(next);
+}
+

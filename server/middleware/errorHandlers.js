@@ -7,7 +7,7 @@ export function catchError(err, req, res, next) {
 // development error handler
 // will print stacktrace
 export function devErrorHandler(err, req, res) {
-  res.sendStatus(err.status || 500);
+  res.status(err.status || 500);
   res.json({
     message: err.message,
     error: err,
@@ -17,7 +17,7 @@ export function devErrorHandler(err, req, res) {
 // production error handler
 // no stacktraces leaked to user
 export function prodErrorHandler(err, req, res) {
-  res.sendStatus(err.status || 500);
+  res.status(err.status || 500);
   res.render('error', {
     message: err.message,
     error: {},

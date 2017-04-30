@@ -70,9 +70,8 @@ export default function initialRender(req, res) {
   getGuestList().then((data) => {
     const store = initialiseStore(data, req.user);
     const initialState = store.getState();
+    console.log(initialState);
     const routes = createRoutes(store);
-
-    console.log(req.flash());
 
     match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
       if (error) {
@@ -91,9 +90,11 @@ export default function initialRender(req, res) {
             </Provider>
           </div>,
         );
+        const localState = mergeLocationIntoState(initialState, renderProps);
+        console.log(localState);
         const renderedTemplate = renderTemplate(
           html,
-          mergeLocationIntoState(initialState, renderProps),
+          localState,
         );
         res.status(200).send(renderedTemplate);
       } else {

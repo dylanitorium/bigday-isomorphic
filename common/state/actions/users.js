@@ -11,6 +11,9 @@ import {
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
   LOGOUT_ERROR,
+  GENERATE_APIKEY_REQUEST,
+  GENERATE_APIKEY_SUCCESS,
+  GENERATE_APIKEY_ERROR,
 } from '../constants/users';
 
 const loginRequest = makeActionCreator(LOGIN_REQUEST);
@@ -20,6 +23,10 @@ const loginError = makeActionCreator(LOGIN_ERROR, 'error');
 const logoutRequest = makeActionCreator(LOGOUT_REQUEST);
 const logoutSuccess = makeActionCreator(LOGOUT_SUCCESS);
 const logoutError = makeActionCreator(LOGOUT_ERROR, 'error');
+
+const generateApiKeyRequest = makeActionCreator(GENERATE_APIKEY_REQUEST);
+const generateApiKeySuccess = makeActionCreator(GENERATE_APIKEY_SUCCESS, 'user');
+const generateApiKeyError = makeActionCreator(GENERATE_APIKEY_ERROR, 'error');
 
 export const login = credentials => (
   (dispatch) => {
@@ -68,3 +75,26 @@ export const logout = () => (
     .catch(err => dispatch(logoutError(err)));
   }
 );
+
+export const generateApiKey = (apikey) => (
+  (dispatch) => {
+    dispatch(generateApiKeyRequest());
+    fetch('/api/generateApiKey', {
+      method: 'post',
+      mode: 'cors',
+      credentials: 'same-origin',
+      headers: {
+        'apikey': apikey, //eslint-disable-line
+        'Accept': 'application/json', //eslint-disable-line
+        'Content-Type': 'application/json' //eslint-disable-line
+      },
+    })
+      .then(checkResponseStatus)
+      .then(parseJSON)
+      .then((user) => {
+        dispatch(generateApiKeySuccess(user));
+      })
+      .catch(err => dispatch(generateApiKeyError(err)));
+  }
+);
+

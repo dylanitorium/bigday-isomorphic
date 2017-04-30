@@ -1,4 +1,4 @@
-export const navItems = [ // eslint-disable-line
+export const navItems = [
   {
     path: '/',
     title: 'Dashboard',
@@ -7,6 +7,11 @@ export const navItems = [ // eslint-disable-line
   {
     path: '/guests',
     title: 'Guests',
+    index: false,
+  },
+  {
+    path: '/settings',
+    title: 'Settings',
     index: false,
   },
 ];

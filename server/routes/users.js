@@ -29,3 +29,9 @@ export const logoutUser = (req, res) => {
   req.logout();
   res.status(200).send('OK');
 };
+
+export const generateApiKey = (req, res, next) => {
+  service.generateApiKey(req.user)
+    .then(user => res.json(user))
+    .catch(err => next(err));
+};

@@ -57,14 +57,14 @@ const getActions = text => (
   </Button>
 );
 
-const getInitialState = (fields) => {
+const getInitialState = (fields, props) => {
   const state = {
     validation: {},
     values: {},
   };
   fields.forEach((field) => {
     state.validation[field.name] = null;
-    state.values[field.name] = field.default;
+    state.values[field.name] = (props.formData[field.name]) || field.default;
   });
   return state;
 };
@@ -73,9 +73,14 @@ class Form extends React.Component {
   constructor(props) {
     super(props);
     const { fields } = props;
-    this.state = getInitialState(fields);
+    this.state = getInitialState(fields, props);
     this.handleFieldChange = this.handleFieldChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { fields } = nextProps;
+    this.state = getInitialState(fields, nextProps);
   }
 
   handleFieldChange(event) {

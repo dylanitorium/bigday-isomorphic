@@ -15,13 +15,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  group: {
-    type: String,
-    enum: [
-      USER_GROUPS.ADMIN,
-      USER_GROUPS.EDITOR,
-    ],
-  },
+  apikey: String,
 });
 
 function encryptPassword(next) {

@@ -38,6 +38,7 @@ const deleteGuestError = makeActionCreator(DELETE_GUEST_ERROR, 'guest', 'error')
 const fetchGuest = (getState, guest) => (fetch('/api/guests', {
   method: 'post',
   mode: 'cors',
+  credentials: 'same-origin',
   headers: {
     'Content-Type': 'application/json',
   },

@@ -1,4 +1,5 @@
 import local from './local';
+import localApiKey from './localApiKey';
 import {
   intoSession,
   outOfSession,
@@ -13,4 +14,5 @@ export default (passport) => {
   // Strategies
   // ==========
   passport.use(local);
+  passport.use(localApiKey);
 };
