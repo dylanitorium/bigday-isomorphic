@@ -41,3 +41,7 @@ export function getGuestList() { //eslint-disable-line
 export function patchGuests(patch) {
   return handlePatch(patch).then(() => (getGuestList()));
 }
+
+export function getGuestByCode(code) {
+  return Guest.findOne({ code });
+}
