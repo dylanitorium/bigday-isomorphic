@@ -4,6 +4,7 @@ import { renderToString } from 'react-dom/server';
 import { RouterContext, match } from 'react-router';
 import { Provider } from 'react-redux';
 import { getGuestList } from './api/guests';
+
 import configureStore from '../common/state/stores/configureStore';
 import createRoutes from '../common/views/routes';
 
@@ -70,7 +71,6 @@ export default function initialRender(req, res) {
   getGuestList().then((data) => {
     const store = initialiseStore(data, req.user);
     const initialState = store.getState();
-    console.log(initialState);
     const routes = createRoutes(store);
 
     match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
