@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt-nodejs';
-import { USER_GROUPS } from '../../common/state/constants/users';
 
 const UserSchema = new mongoose.Schema({
   name: String,

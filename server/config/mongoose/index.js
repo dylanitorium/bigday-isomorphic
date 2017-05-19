@@ -4,9 +4,7 @@ import {
   path,
 } from './constants';
 
-
 export const mongoUri = `mongodb://${host}:${port}/${path}`;
-
 
 export default (mongoose) => {
   mongoose.connect(mongoUri);

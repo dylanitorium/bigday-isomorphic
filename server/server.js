@@ -7,7 +7,7 @@ import express from 'express';
 import session from 'express-session';
 import passport from 'passport';
 import mongoose from 'mongoose';
-import flash from 'connect-flash'
+import flash from 'connect-flash';
 import { Server } from 'http';
 
 import mongooseConfig from './config/mongoose';
