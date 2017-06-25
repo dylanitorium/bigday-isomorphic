@@ -1,23 +1,13 @@
+Accounts and Users
+----------------
+As a `User` I can login with Google or Facebook.
 
-//command line tool to create components
+As a `User` on my first login I want to create an `Account` as the `Owner`.
 
+As a `User` I can add `Guests` to my `Account`.
 
-//Delete confirmation
-//Undo
-//separate config
-//modularise abstract utils
-//read more redux docs.
-//Validation
-//add rejections to server utils
-//move stuf form guest controller to guest util
-//Good error messages from the server
-//Error messages, pops and handling
-//empty field placeholders
-//container wrapping
-//guest styling
-//dashboard mock up styling
-//AUTH and Login !!
-//Drag and drop?
-//separate actions
-//Combine all views to use a single provider/store
-//refine refine refine
+As an `Owner` I can add `Users` to my account.
+
+As a `User` I can see a dashboard with the total number of `Guests`
+
+As a `User` I can generate an API Key so third party apps can interface with my `Guest` list.
