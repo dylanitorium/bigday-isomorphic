@@ -10,7 +10,7 @@ const getClassName = ({ layout }) => ((layout) ? layout.map(name => grid[name]).
 const getFields = (fields, state, handleFieldChange) => {
   const { values, validation } = state;
   return fields.map((field, index) => {
-    const { title, required, name, type } = field;
+    const { title, required, name, type, options } = field;
     const Component = FieldTypes[type];
     return (<Component
       title={title}
@@ -19,6 +19,7 @@ const getFields = (fields, state, handleFieldChange) => {
       name={name}
       value={values[name]}
       isValid={validation[name]}
+      options={options || []}
       onValueChange={handleFieldChange}
       key={index}
     />);

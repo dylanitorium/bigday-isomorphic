@@ -100,6 +100,69 @@
 .fields__numericField___V0YcX input::-webkit-outer-spin-button {
   display: none;
 }
+
+.fields__dropdownField___1IAEj {
+  margin-bottom: 1rem;
+}
+
+
+.fields__dropdownField___1IAEj label {
+  margin-bottom: .5rem;
+}
+
+
+/* root */
+.fields__dropdownField___1IAEj > div{
+ position: relative;
+}
+
+/* control */
+.fields__dropdownField___1IAEj > div > div:first-child {
+  display: flex;
+  align-items: center;
+  background-color: rgba(236, 240, 241, 1.0);
+  border: 1px solid transparent;
+  padding: 0 1rem;
+  height: 3rem;
+  width: 100%;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.fields__dropdownField___1IAEj > div > div:first-child:hover {
+  background-color: rgba(189, 195, 199, 1.0);
+}
+
+/* placeholder */
+.fields__dropdownField___1IAEj > div > div:first-child > div {
+
+}
+
+/* menu */
+.fields__dropdownField___1IAEj > div > div + div {
+  border: 2px solid rgba(189, 195, 199, 1.0);
+  background-color: rgba(236, 240, 241, 1.0);
+  border-top: none;
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  box-shadow: 0 1px 7px 0 rgba(0, 0, 0, .11);
+}
+
+/* item */
+.fields__dropdownField___1IAEj > div > div + div > div {
+  padding: 0.5rem 1rem;
+  transition: all .3s ease;
+  cursor: pointer;
+  border-top: 1px solid rgba(189, 195, 199, 1.0);
+}
+
+/* item */
+.fields__dropdownField___1IAEj > div > div + div > div:hover {
+  background-color: rgba(189, 195, 199, 1.0);
+}
+
 /* ---- Base ---- */
 .button__button___2bexq {
   background-color: white;

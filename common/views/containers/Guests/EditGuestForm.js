@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Form from '../../components/Form';
-import { formFields } from '../../config/guests';
+import { editFields } from '../../config/guests';
 import {
   updateGuest,
   closeModal,
@@ -25,9 +25,10 @@ class AddGuestForm extends React.Component {
   }
 
   render() {
+    console.log(editFields);
     return (
       <Form
-        fields={formFields}
+        fields={editFields}
         formData={this.state}
         onSubmit={handleSubmit(this.props)}
         onDataChange={onDataChange(this)}

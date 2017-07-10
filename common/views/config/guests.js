@@ -53,7 +53,7 @@ export const tableActions = [
 export const tableLoadingMessage = 'Loading...';
 export const tableEmptyMessage = 'No Guests Yet';
 
-export const formFields = [
+export const addFields = [
   {
     type: 'TextField',
     name: 'name',
@@ -83,14 +83,53 @@ export const formFields = [
     ],
   },
   {
-    type: 'EmailField',
-    name: 'email',
-    title: 'Email',
+    type: 'HiddenField',
+    name: '_id',
+    title: '',
+  },
+];
+
+
+export const editFields = [
+  {
+    type: 'TextField',
+    name: 'name',
+    title: 'Name',
     default: '',
     validation: {
       callback: requiredField,
-      message: 'This field needs to be filed out',
+      message: 'This field needs to be filled out',
     },
+    layout: [
+      'alpha',
+      'threeQuarters',
+    ],
+  },
+  {
+    type: 'NumericField',
+    name: 'quantity',
+    title: 'Quantity',
+    default: '1',
+    validation: {
+      callback: requiredField,
+      message: 'This field needs to be filled out',
+    },
+    layout: [
+      'omega',
+      'oneQuarter',
+    ],
+  },
+  {
+    type: 'DropdownField',
+    name: 'status',
+    title: 'Status',
+    options: [
+      'Invite not yet sent',
+      'Awaiting RSVP',
+      'Accepted',
+      'Declined',
+    ],
+    default: 'Invite not yet sent',
   },
   {
     type: 'HiddenField',
