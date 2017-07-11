@@ -1,7 +1,8 @@
 // catch 404 and forward to error handler
-export function catchError(err, req, res, next) {
-  err.status = err.status || 404;
-  next(err);
+export function catchError(req, res, next) {
+  next({
+    status: 404,
+  });
 }
 
 // development error handler

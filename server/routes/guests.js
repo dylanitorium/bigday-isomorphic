@@ -10,13 +10,12 @@ export function patchGuests(req, res, next) { //eslint-disable-line
 }
 
 export function getGuestByCode(req, res, next) {
-  if (!req.params.code) {
-    next('No code');
-  }
   service.getGuestByCode(req.params.code)
     .then((data) => {
+      if (!data) {
+        // return next({ message: 'No guest matches that code' });
+      }
       res.json(data);
-    })
-    .catch(next);
+    });
 }
 
