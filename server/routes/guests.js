@@ -3,6 +3,7 @@
 // and process requests and returns respones
 import * as service from '../api/guests';
 
+
 export function patchGuests(req, res, next) { //eslint-disable-line
   service.patchGuests(req.body)
     .then(data => (res.json(data)))
@@ -13,9 +14,9 @@ export function getGuestByCode(req, res, next) {
   service.getGuestByCode(req.params.code)
     .then((data) => {
       if (!data) {
-        // return next({ message: 'No guest matches that code' });
+        throw new Error('No Guest');
       }
       res.json(data);
-    });
+    }).catch(next);
 }
 
