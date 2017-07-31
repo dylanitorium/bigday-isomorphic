@@ -29,6 +29,7 @@ export default (app, passport) => {
   // ======
   router.route('/api/guests').post(requireAuthenticated, guests.patchGuests);
   router.route('/api/guestByCode/:code').post(auth.localApiKey(passport), guests.getGuestByCode);
+  router.route('/api/rsvpGuest').post(auth.localApiKey(passport), guests.patchGuests);
 
 
   router.get('*', initialRender);

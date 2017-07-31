@@ -8,6 +8,7 @@ const GuestSchema = new mongoose.Schema({
   address: String,
   quantity: Number,
   code: String,
+  phone: String,
   notes: String,
   status: {
     type: String,
