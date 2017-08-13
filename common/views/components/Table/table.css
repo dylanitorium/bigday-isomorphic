@@ -17,11 +17,12 @@
 
 .table th {
   text-align: left;
-  padding: 15px 0;
+  padding: 15px;
   border-bottom: 2px solid --grey-light;
 }
 
 .table td {
+  padding: 5px 15px;
   border-bottom: 1px solid --grey-light;
 }
 

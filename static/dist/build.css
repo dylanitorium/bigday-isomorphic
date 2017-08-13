@@ -1,6 +1,6 @@
 .sidebar__sidebar___2845H {
   background-color: #eee;
-  width: 250px;
+  min-width: 250px;
   overflow-y: auto;
 }
 .main__main___2o5pw {
@@ -595,11 +595,12 @@ h2 {
 
 .table__table___33TBf th {
   text-align: left;
-  padding: 15px 0;
+  padding: 15px;
   border-bottom: 2px solid rgba(189, 195, 199, 1.0);
 }
 
 .table__table___33TBf td {
+  padding: 5px 15px;
   border-bottom: 1px solid rgba(189, 195, 199, 1.0);
 }
 

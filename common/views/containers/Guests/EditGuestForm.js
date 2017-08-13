@@ -24,9 +24,10 @@ class AddGuestForm extends React.Component {
     this.state = props.guest;
   }
 
+
   render() {
-    console.log(editFields);
     return (
+      <div>
       <Form
         fields={editFields}
         formData={this.state}
@@ -34,6 +35,7 @@ class AddGuestForm extends React.Component {
         onDataChange={onDataChange(this)}
         buttonText={'Submit'}
       />
+      </div>
     );
   }
 }

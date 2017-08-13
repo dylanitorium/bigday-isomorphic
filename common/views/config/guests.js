@@ -21,6 +21,11 @@ export const tableColumns = [
     callback: value => value,
   },
   {
+    name: 'notes',
+    title: 'Notes',
+    callback: value => value,
+  },
+  {
     name: 'code',
     title: 'Code',
     callback: value => value,
