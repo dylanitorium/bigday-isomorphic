@@ -59,7 +59,7 @@
     "jsonpatch-to-mongodb": "^0.3.0",
     "mongoose": "^4.9.6",
     "morgan": "^1.8.1",
-    "nconf": "^0.8.4",
+    "nconf": "^0.11.4",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "passport-localapikey-update": "^0.5.0",
